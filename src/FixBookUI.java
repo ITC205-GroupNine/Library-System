@@ -28,7 +28,7 @@ public class FixBookUI {
       while (true) {
         switch (state) {
           case READY:
-            String bookIdentifier = input("Scan Book (<enter> completes): ");
+            String bookIdentifier = input("Scan Book ( <enter> completes): ");
             if (bookIdentifier.length() == 0) {
               fixBookControl.scanningComplete();
             }
