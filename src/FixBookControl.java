@@ -36,7 +36,7 @@ public class FixBookControl {
 		    return;
 		}
 		if (!currentBook.Damaged()) {
-		    ui.display("\"Book has not been damaged");
+		    ui.display("Book has not been damaged");
 		    return;
 		}
 		ui.display(currentBook.toString());
