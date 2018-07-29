@@ -65,13 +65,13 @@ public class FixBookUI {
 
 	
     private String input(String prompt) {
-        System.out.print(prompt);
-        return userInput.nextLine();
+      System.out.print(prompt);
+      return userInput.nextLine();
     }
 
 
     private void output(Object object) {
-        System.out.println(object);
+      System.out.println(object);
     }
 
     //Is this necessary or should I remove it?
