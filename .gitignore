@@ -30,4 +30,3 @@ src/
 bin/
 .idea/
 library.obj
-*.iml
