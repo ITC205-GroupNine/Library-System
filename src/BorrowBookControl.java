@@ -3,7 +3,7 @@ import java.util.List;
 
 public class BorrowBookControl {
 	
-	private BorrowBookUI userInterface;
+	private BorrowBookUi userInterface;
 	private library library;
 	private member member;
 	private enum ControlState {INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED};
@@ -19,12 +19,12 @@ public class BorrowBookControl {
 	}
 	
 
-	public void setUI(BorrowBookUI ui) {
+	public void setUI(BorrowBookUi ui) {
 		if (!state.equals(ControlState.INITIALISED)) {
             throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED state");
         }
 		this.userInterface = ui;
-		ui.setState(BorrowBookUI.UiState.READY);
+		ui.setState(BorrowBookUi.UiState.READY);
 		state = ControlState.READY;
 	}
 
@@ -41,12 +41,12 @@ public class BorrowBookControl {
 		}
 		if (library.memberCanBorrow(member)) {
 			pendingBookList = new ArrayList<>();
-			userInterface.setState(BorrowBookUI.UiState.SCANNING);
+			userInterface.setState(BorrowBookUi.UiState.SCANNING);
 			state = ControlState.SCANNING;
 		}
 		else{
 			userInterface.display("Member cannot borrow at this time");
-			userInterface.setState(BorrowBookUI.UiState.RESTRICTED);
+			userInterface.setState(BorrowBookUi.UiState.RESTRICTED);
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class BorrowBookControl {
 				userInterface.display(book.toString());
 			}
 			completedLoanList = new ArrayList<loan>();
-			userInterface.setState(BorrowBookUI.UiState.FINALISING);
+			userInterface.setState(BorrowBookUi.UiState.FINALISING);
 			state = ControlState.FINALISING;
 		}
 	}
@@ -104,13 +104,13 @@ public class BorrowBookControl {
 		for (loan loan : completedLoanList) {
 			userInterface.display(loan.toString());
 		}
-		userInterface.setState(BorrowBookUI.UiState.COMPLETED);
+		userInterface.setState(BorrowBookUi.UiState.COMPLETED);
 		state = ControlState.COMPLETED;
 	}
 
 	
 	public void cancel() {
-		userInterface.setState(BorrowBookUI.UiState.CANCELLED);
+		userInterface.setState(BorrowBookUi.UiState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}
 	
