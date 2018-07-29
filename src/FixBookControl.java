@@ -1,9 +1,9 @@
 public class FixBookControl {
 	
 	private FixBookUI userInterface;
-	private enum CONTROL_STATE { INITIALISED, READY, FIXING }
+	private enum fixBookControlState { INITIALISED, READY, FIXING }
 
-	private CONTROL_STATE state;
+	private fixBookControlState state;
 	
 	private library library;
 	private book currentBook;
@@ -11,22 +11,22 @@ public class FixBookControl {
 
 	public FixBookControl() {
 	    this.library = library.INSTANCE();
-	    state = CONTROL_STATE.INITIALISED;
+	    state = fixBookControlState.INITIALISED;
 	}
 	
 	
 	public void setUI(FixBookUI ui) {
-	    if (!state.equals(CONTROL_STATE.INITIALISED)) {
+	    if (!state.equals(fixBookControlState.INITIALISED)) {
 	        throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
 		}
 	    this.userInterface = ui;
 	    ui.setState(FixBookUI.UI_STATE.READY);
-	    state = CONTROL_STATE.READY;
+	    state = fixBookControlState.READY;
 	}
 
 
 	public void bookScanned(int bookId) {
-		if (!state.equals(CONTROL_STATE.READY)) {
+		if (!state.equals(fixBookControlState.READY)) {
 		    throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
 		}	
 		currentBook = library.Book(bookId);
@@ -41,12 +41,12 @@ public class FixBookControl {
 		}
         userInterface.display(currentBook.toString());
         userInterface.setState(FixBookUI.UI_STATE.FIXING);
-		state = CONTROL_STATE.FIXING;		
+		state = fixBookControlState.FIXING;
 	}
 
 
 	public void fixBook(boolean fix) {
-		if (!state.equals(CONTROL_STATE.FIXING)) {
+		if (!state.equals(fixBookControlState.FIXING)) {
 		    throw new RuntimeException("FixBookControl: cannot call fixBook except in FIXING state");
 		}	
 		if (fix) {
@@ -54,12 +54,12 @@ public class FixBookControl {
 		}
 		currentBook = null;
         userInterface.setState(FixBookUI.UI_STATE.READY);
-		state = CONTROL_STATE.READY;		
+		state = fixBookControlState.READY;
 	}
 
 	
 	public void scanningComplete() {
-		if (!state.equals(CONTROL_STATE.READY)) {
+		if (!state.equals(fixBookControlState.READY)) {
 		    throw new RuntimeException("FixBookControl: cannot call scanningComplete except in READY state");
 		}
         userInterface.setState(FixBookUI.UI_STATE.COMPLETED);
