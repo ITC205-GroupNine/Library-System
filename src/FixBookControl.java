@@ -1,67 +1,66 @@
 public class FixBookControl {
-	
-	private FixBookUI userInterface;
-	private enum fixBookControlState { INITIALISED, READY, FIXING }
 
-	private fixBookControlState state;
-	
-	private library library;
-	private book currentBook;
+    private FixBookUI userInterface;
+    private enum fixBookControlState { INITIALISED, READY, FIXING }
 
-
-	public FixBookControl() {
-	    this.library = library.INSTANCE();
-	    state = fixBookControlState.INITIALISED;
-	}
-	
-	
-	public void setUI(FixBookUI ui) {
-	    if (!state.equals(fixBookControlState.INITIALISED)) {
-	        throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
-		}
-	    this.userInterface = ui;
-	    ui.setState(FixBookUI.UI_STATE.READY);
-	    state = fixBookControlState.READY;
-	}
+    private fixBookControlState state;
+    private library library;
+    private book currentBook;
 
 
-	public void bookScanned(int bookId) {
-		if (!state.equals(fixBookControlState.READY)) {
-		    throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
-		}	
-		currentBook = library.Book(bookId);
-		
-		if (currentBook == null) {
+    public FixBookControl() {
+        this.library = library.INSTANCE();
+        state = fixBookControlState.INITIALISED;
+    }
+
+
+    public void setUI(FixBookUI userInterface) {
+        if (!state.equals(fixBookControlState.INITIALISED)) {
+            throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
+        }
+        this.userInterface = userInterface;
+        userInterface.setState(FixBookUI.UI_STATE.READY);
+        state = fixBookControlState.READY;
+    }
+
+
+    public void bookScanned(int bookId) {
+        if (!state.equals(fixBookControlState.READY)) {
+            throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
+        }
+        currentBook = library.Book(bookId);
+
+        if (currentBook == null) {
             userInterface.display("Invalid bookId");
-		    return;
-		}
-		if (!currentBook.Damaged()) {
+            return;
+        }
+        if (!currentBook.Damaged()) {
             userInterface.display("Book has not been damaged");
-		    return;
-		}
+            return;
+        }
         userInterface.display(currentBook.toString());
         userInterface.setState(FixBookUI.UI_STATE.FIXING);
-		state = fixBookControlState.FIXING;
-	}
+        state = fixBookControlState.FIXING;
+    }
 
 
-	public void fixBook(boolean fix) {
-		if (!state.equals(fixBookControlState.FIXING)) {
-		    throw new RuntimeException("FixBookControl: cannot call fixBook except in FIXING state");
-		}	
-		if (fix) {
-		    library.repairBook(currentBook);
-		}
-		currentBook = null;
+    public void fixBook(boolean fix) {
+        if (!state.equals(fixBookControlState.FIXING)) {
+            throw new RuntimeException("FixBookControl: cannot call fixBook except in FIXING state");
+        }
+        if (fix) {
+            library.repairBook(currentBook);
+        }
+        currentBook = null;
         userInterface.setState(FixBookUI.UI_STATE.READY);
-		state = fixBookControlState.READY;
-	}
+        state = fixBookControlState.READY;
+    }
 
-	
-	public void scanningComplete() {
-		if (!state.equals(fixBookControlState.READY)) {
-		    throw new RuntimeException("FixBookControl: cannot call scanningComplete except in READY state");
-		}
+
+    public void scanningComplete() {
+        if (!state.equals(fixBookControlState.READY)) {
+            throw new RuntimeException("FixBookControl: cannot call scanningComplete except in READY state");
+        }
         userInterface.setState(FixBookUI.UI_STATE.COMPLETED);
-	}
+    }
 }
