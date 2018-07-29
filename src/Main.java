@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner IN;
-	private static library LIB;
+	private static Library LIB;
 	private static String MENU;
 	private static Calendar CAL;
 	private static SimpleDateFormat SDF;
@@ -15,15 +15,15 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("\nLibrary Main Menu\n\n")
-		  .append("  M  : add member\n")
+		  .append("  M  : add Member\n")
 		  .append("  LM : list members\n")
 		  .append("\n")
-		  .append("  B  : add book\n")
+		  .append("  B  : add Book\n")
 		  .append("  LB : list books\n")
 		  .append("  FB : fix books\n")
 		  .append("\n")
-		  .append("  L  : take out a loan\n")
-		  .append("  R  : return a loan\n")
+		  .append("  L  : take out a Loan\n")
+		  .append("  R  : return a Loan\n")
 		  .append("  LL : list loans\n")
 		  .append("\n")
 		  .append("  P  : pay fine\n")
@@ -41,15 +41,15 @@ public class Main {
 
 		try {			
 			IN = new Scanner(System.in);
-			LIB = library.INSTANCE();
+			LIB = Library.INSTANCE();
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (member m : LIB.Members()) {
+			for (Member m : LIB.Members()) {
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
+			for (Book b : LIB.Books()) {
 				output(b);
 			}
 						
@@ -113,7 +113,7 @@ public class Main {
 					break;
 				}
 				
-				library.SAVE();
+				Library.SAVE();
 			}			
 		} catch (RuntimeException e) {
 			output(e);
@@ -123,14 +123,14 @@ public class Main {
 
 	
 	private static void payFine() {
-		new PayFineUI(new PayFineControl()).run();		
+		new PayFineUi(new PayFineControl()).run();
 	}
 
 
 	private static void listCurrentLoans() {
 		output("");
-		for (loan loan : LIB.CurrentLoans()) {
-			output(loan + "\n");
+		for (Loan Loan : LIB.CurrentLoans()) {
+			output(Loan + "\n");
 		}		
 	}
 
@@ -138,7 +138,7 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.Books()) {
+		for (Book book : LIB.Books()) {
 			output(book + "\n");
 		}		
 	}
@@ -147,25 +147,25 @@ public class Main {
 
 	private static void listMembers() {
 		output("");
-		for (member member : LIB.Members()) {
-			output(member + "\n");
+		for (Member Member : LIB.Members()) {
+			output(Member + "\n");
 		}		
 	}
 
 
 
 	private static void borrowBook() {
-		new BorrowBookUI(new BorrowBookControl()).run();		
+		new BorrowBookUi(new BorrowBookControl()).run();
 	}
 
 
 	private static void returnBook() {
-		new ReturnBookUI(new ReturnBookControl()).run();		
+		new ReturnBookUi(new ReturnBookControl()).run();
 	}
 
 
 	private static void fixBooks() {
-		new FixBookUI(new FixBookControl()).run();		
+		new FixBookUi(new FixBookControl()).run();
 	}
 
 
@@ -187,7 +187,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		book book = LIB.Add_book(author, title, callNo);
+		Book book = LIB.Add_book(author, title, callNo);
 		output("\n" + book + "\n");
 		
 	}
@@ -199,8 +199,8 @@ public class Main {
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
 			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member member = LIB.Add_mem(lastName, firstName, email, phoneNo);
-			output("\n" + member + "\n");
+			Member Member = LIB.Add_mem(lastName, firstName, email, phoneNo);
+			output("\n" + Member + "\n");
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid phone number\n");
