@@ -9,16 +9,18 @@ public class FixBookControl {
 
 
     public FixBookControl() {
+        //this should probably be a getInstance() per Jims notes. LIBRARY is not under my control, so request update?
         this.library = library.INSTANCE();
         state = fixBookControlState.INITIALISED;
     }
 
 
-    public void setUI(FixBookUI userInterface) {
+    public void setUI(FixBookUI newUserInterface) {
         if (!state.equals(fixBookControlState.INITIALISED)) {
+            //Should we be throwing exceptions whne they can be avoided?
             throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
         }
-        this.userInterface = userInterface;
+        this.userInterface = newUserInterface;
         userInterface.setState(FixBookUI.UI_STATE.READY);
         state = fixBookControlState.READY;
     }
@@ -26,6 +28,7 @@ public class FixBookControl {
 
     public void bookScanned(int bookId) {
         if (!state.equals(fixBookControlState.READY)) {
+            //Should we be throwing exceptions whne they can be avoided?
             throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
         }
         currentBook = library.Book(bookId);
