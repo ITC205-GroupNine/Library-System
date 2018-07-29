@@ -6,15 +6,15 @@ public class FixBookUI {
     public enum fixBookUserInterfaceState { INITIALISED, READY, FIXING, COMPLETED }
 
     private FixBookControl fixBookControl;
-    private Scanner input;
+    private Scanner userInput;
     private fixBookUserInterfaceState state;
 
 
     public FixBookUI(FixBookControl control) {
-        this.fixBookControl = control;
-        input = new Scanner(System.in);
-        state = fixBookUserInterfaceState.INITIALISED;
-        control.setUI(this);
+      this.fixBookControl = control;
+      userInput = new Scanner(System.in);
+      state = fixBookUserInterfaceState.INITIALISED;
+      control.setUI(this);
     }
 
 
@@ -24,50 +24,49 @@ public class FixBookUI {
 
 
     public void run() {
-        output("Fix Book Use Case UI\n");
-
-        while (true) {
-            switch (state) {
-              case READY:
-                String bookStr = input("Scan Book (<enter> completes): ");
-                if (bookStr.length() == 0) {
-                    fixBookControl.scanningComplete();
-                }
-                else {
-                    try {
-                        int bookId = Integer.valueOf(bookStr).intValue();
-                    fixBookControl.bookScanned(bookId);
-                    }
-                    catch (NumberFormatException e) {
-                        output("Invalid bookId");
-                    }
-                }
-                break;
-
-              case FIXING:
-                String ans = input("Fix Book? (Y/N) : ");
-                boolean fix = false;
-                if (ans.toUpperCase().equals("Y")) {
-                    fix = true;
-                }
-                fixBookControl.fixBook(fix);
-                break;
-
-              case COMPLETED:
-                output("Fixing process complete");
-                return;
-
-              default:
-                output("Unhandled state");
-                throw new RuntimeException("FixBookUI : unhandled state :" + state);
+      output("Fix Book Interface\n");
+      while (true) {
+        switch (state) {
+          case READY:
+            String bookIdentifier = input("Scan Book (<enter> completes): ");
+            if (bookIdentifier.length() == 0) {
+              fixBookControl.scanningComplete();
             }
+            else {
+              try {
+                int bookId = Integer.valueOf(bookIdentifier);
+                fixBookControl.bookScanned(bookId);
+              }
+              catch (NumberFormatException exception) {
+                output("This is not a valid bookId");
+              }
+            }
+            break;
+
+          case FIXING:
+            String fixBookAnswer = input("Would you like to fix Book? (Y/N) : ");
+            boolean fix = false;
+            if (fixBookAnswer.toUpperCase().equals("Y")) {
+              fix = true;
+            }
+            fixBookControl.fixBook(fix);
+            break;
+
+          case COMPLETED:
+            output("The book/s have been fixed.");
+            return;
+
+          default:
+            output("Unhandled state");
+            throw new RuntimeException("FixBookUI : unhandled state :" + state);
         }
+      }
     }
 
 	
     private String input(String prompt) {
         System.out.print(prompt);
-        return input.nextLine();
+        return userInput.nextLine();
     }
 
 
@@ -75,7 +74,7 @@ public class FixBookUI {
         System.out.println(object);
     }
 
-
+    //Is this necessary or should I remove it?
     public void display(Object object) {
         output(object);
     }
