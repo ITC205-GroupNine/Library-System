@@ -15,10 +15,10 @@ public class FixBookControl {
     }
 
 
-    public void setUI(FixBookUi newUserInterface) {
+    public void setUi(FixBookUi newUserInterface) {
         if (!state.equals(FixBookControlState.INITIALISED)) {
             //Should we be throwing exceptions whne they can be avoided?
-            throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
+            throw new RuntimeException("FixBookControl: cannot call setUi except in INITIALISED state");
         }
         this.userInterface = newUserInterface;
         userInterface.setState(FixBookUi.fixBookUserInterfaceState.READY);
