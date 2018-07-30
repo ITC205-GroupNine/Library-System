@@ -3,21 +3,21 @@ import java.util.Scanner;
 
 public class FixBookUi {
 
-    public enum fixBookUserInterfaceState { INITIALISED, READY, FIXING, COMPLETED }
+    public enum FixBookUserInterfaceState { INITIALISED, READY, FIXING, COMPLETED }
     private FixBookControl fixBookControl;
     private Scanner userInput;
-    private fixBookUserInterfaceState state;
+    private FixBookUserInterfaceState state;
 
 
     public FixBookUi(FixBookControl control) {
         this.fixBookControl = control;
         userInput = new Scanner(System.in);
-        state = fixBookUserInterfaceState.INITIALISED;
+        state = FixBookUserInterfaceState.INITIALISED;
         control.setUI(this);
     }
 
 
-    public void setState(fixBookUserInterfaceState state) {
+    public void setState(FixBookUserInterfaceState state) {
         this.state = state;
     }
 
