@@ -30,14 +30,12 @@ public class FixBookUi {
                 String bookIdentifier = input("Scan Book ( <enter> completes): ");
                 if (bookIdentifier.length() == 0) {
                     fixBookControl.scanningComplete();
-                }
-                else {
+                } else {
                     try {
                         int bookId = Integer.valueOf(bookIdentifier);
                         fixBookControl.bookScanned(bookId);
-                    }
-                    catch (NumberFormatException exception) {
-                    output("This is not a valid bookId");
+                    } catch (NumberFormatException exception) {
+                        output("This is not a valid bookId");
                     }
                 }
                 break;
