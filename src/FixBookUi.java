@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class FixBookUi {
 
     public enum fixBookUserInterfaceState { INITIALISED, READY, FIXING, COMPLETED }
-
     private FixBookControl fixBookControl;
     private Scanner userInput;
     private fixBookUserInterfaceState state;
