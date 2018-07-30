@@ -39,7 +39,6 @@ public class FixBookUi {
                     }
                 }
                 break;
-
             case FIXING:
                 String fixBookAnswer = input("Would you like to fix Book? (Y/N) : ");
                 boolean fix = false;
@@ -48,11 +47,9 @@ public class FixBookUi {
                 }
                 fixBookControl.fixBook(fix);
                 break;
-
             case COMPLETED:
                 output("The book/s have been fixed.");
                 return;
-
             default:
                 output("Unhandled state");
                 throw new RuntimeException("FixBookUi : unhandled state :" + state);
