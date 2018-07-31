@@ -8,7 +8,7 @@ public class FixBookControl {
 
 
     public FixBookControl() {
-        //this should probably be a getInstance() per Jims notes. LIBRARY is not under my control, so request update?
+        //this should probably be a getInstance() per Jim's notes. LIBRARY is not under my control, so request update?
         this.library = library.INSTANCE();
         state = FixBookControlState.INITIALISED;
     }
@@ -16,11 +16,10 @@ public class FixBookControl {
 
     public void setUi(FixBookUi newUserInterface) {
         if (!state.equals(FixBookControlState.INITIALISED)) {
-            //Should we be throwing exceptions whne they can be avoided?
             throw new RuntimeException("FixBookControl: cannot call setUi except in INITIALISED state");
         }
         this.userInterface = newUserInterface;
-        userInterface.setState(FixBookUi.fixBookUserInterfaceState.READY);
+        userInterface.setState(FixBookUi.FixBookUserInterfaceState.READY);
         state = FixBookControlState.READY;
     }
 
@@ -41,7 +40,7 @@ public class FixBookControl {
             return;
         }
         userInterface.display(currentBook.toString());
-        userInterface.setState(FixBookUi.fixBookUserInterfaceState.FIXING);
+        userInterface.setState(FixBookUi.FixBookUserInterfaceState.FIXING);
         state = FixBookControlState.FIXING;
     }
 
@@ -54,7 +53,7 @@ public class FixBookControl {
             library.repairBook(currentBook);
         }
         currentBook = null;
-        userInterface.setState(FixBookUi.fixBookUserInterfaceState.READY);
+        userInterface.setState(FixBookUi.FixBookUserInterfaceState.READY);
         state = FixBookControlState.READY;
     }
 
@@ -63,6 +62,6 @@ public class FixBookControl {
         if (!state.equals(FixBookControlState.READY)) {
             throw new RuntimeException("FixBookControl: cannot call scanningComplete except in READY state");
         }
-        userInterface.setState(FixBookUi.fixBookUserInterfaceState.COMPLETED);
+        userInterface.setState(FixBookUi.FixBookUserInterfaceState.COMPLETED);
     }
 }
