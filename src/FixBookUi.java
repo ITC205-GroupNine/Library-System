@@ -13,7 +13,7 @@ public class FixBookUi {
         this.fixBookControl = control;
         userInput = new Scanner(System.in);
         state = FixBookUserInterfaceState.INITIALISED;
-        control.setUI(this);
+        control.setUi(this);
     }
 
 
