@@ -68,7 +68,7 @@ public class FixBookUi {
         System.out.println(object);
     }
 
-    //Is this necessary or should I remove it?
+
     public void display(Object object) {
         output(object);
     }
