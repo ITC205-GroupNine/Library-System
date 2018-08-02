@@ -38,7 +38,6 @@ public class Main {
 
 
 	public static void main(String[] args) {
-
 		try {			
 			IN = new Scanner(System.in);
 			LIB = library.INSTANCE();
@@ -155,7 +154,7 @@ public class Main {
 
 
 	private static void borrowBook() {
-		new BorrowBookUI(new BorrowBookControl()).run();		
+		new BorrowBookUi(new BorrowBookControl()).run();
 	}
 
 
