@@ -1,4 +1,4 @@
-public class ReturnBookControl {
+class ReturnBookControl {
 
     private ReturnBookUi returnBookUi;
 
@@ -15,7 +15,7 @@ public class ReturnBookControl {
     }
 
 
-    void setUI(ReturnBookUi ui) {
+    void setUi(ReturnBookUi ui) {
         if (!state.equals(controlState.INITIALISED)) {
             throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
         }
@@ -73,6 +73,4 @@ public class ReturnBookControl {
         returnBookUi.setState(ReturnBookUi.uiState.READY);
         state = controlState.READY;
     }
-
-
 }

@@ -14,7 +14,7 @@ public class ReturnBookUi {
         this.returnBookControl = control;
         input = new Scanner(System.in);
         state = uiState.INITIALISED;
-        control.setUI(this);
+        control.setUi(this);
     }
 
 
@@ -38,9 +38,9 @@ public class ReturnBookUi {
                     }
                     break;
                 case INSPECTING:
-                    String ans = input("Is book damaged? (Y/N): ");
+                    String answer = input("Is book damaged? (Y/N): ");
                     boolean isDamaged = false;
-                    if (ans.toUpperCase().equals("Y")) {
+                    if (answer.toUpperCase().equals("Y")) {
                         isDamaged = true;
                     }
                     returnBookControl.dischargeLoan(isDamaged);
