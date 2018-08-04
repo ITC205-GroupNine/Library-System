@@ -3,18 +3,18 @@ import java.util.Scanner;
 
 class ReturnBookUi {
 
-    public enum uiState {INITIALISED, READY, INSPECTING, COMPLETED}
+    public enum UiState {INITIALISED, READY, INSPECTING, COMPLETED}
 
     private ReturnBookControl returnBookControl;
     private Scanner input;
-    private uiState state;
+    private UiState state;
 
 
     ReturnBookUi(ReturnBookControl control) {
         this.returnBookControl = control;
         input = new Scanner(System.in);
-        state = uiState.INITIALISED;
-        control.setUI(this);
+        state = UiState.INITIALISED;
+        control.setUi(this);
     }
 
 
@@ -30,7 +30,7 @@ class ReturnBookUi {
                         returnBookControl.scanningComplete();
                     } else {
                         try {
-                            int bookId = Integer.valueOf(bookString).intValue();
+                            int bookId = Integer.valueOf(bookString);
                             returnBookControl.bookScanned(bookId);
                         } catch (NumberFormatException e) {
                             output("Invalid bookId");
@@ -71,7 +71,7 @@ class ReturnBookUi {
     }
 
 
-    void setState(uiState state) {
+    void setState(UiState state) {
         this.state = state;
     }
 }
