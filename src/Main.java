@@ -48,7 +48,7 @@ public class Main {
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
+			for (Book b : LIB.Books()) {
 				output(b);
 			}
 						
@@ -58,7 +58,7 @@ public class Main {
 			
 			while (!e) {
 				
-				output("\n" + SDF.format(CAL.Date()));
+				output("\n" + SDF.format(CAL.date()));
 				String c = input(MENU);
 				
 				switch (c.toUpperCase()) {
@@ -137,7 +137,7 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.Books()) {
+		for (Book book : LIB.Books()) {
 			output(book + "\n");
 		}		
 	}
@@ -173,7 +173,7 @@ public class Main {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
 			CAL.incrementDate(days);
 			LIB.checkCurrentLoans();
-			output(SDF.format(CAL.Date()));
+			output(SDF.format(CAL.date()));
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
@@ -186,7 +186,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		book book = LIB.Add_book(author, title, callNo);
+		Book book = LIB.Add_book(author, title, callNo);
 		output("\n" + book + "\n");
 		
 	}
