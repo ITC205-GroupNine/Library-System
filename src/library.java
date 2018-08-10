@@ -47,7 +47,7 @@ public class library implements Serializable {
     }
 
 
-    public static synchronized library INSTANCE() {
+    public static synchronized library getInstance() {
         if (library == null) {
             Path path = Paths.get(libraryFile);
             if (Files.exists(path)) {
@@ -65,7 +65,7 @@ public class library implements Serializable {
     }
 
 
-    public static synchronized void SAVE() {
+    public static synchronized void save() {
         if (library != null) {
             library.loadDate = Calendar.getInstance().date();
             try (ObjectOutputStream libraryFileOutputStream = new ObjectOutputStream(new FileOutputStream(libraryFile))) {

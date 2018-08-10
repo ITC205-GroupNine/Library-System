@@ -9,7 +9,7 @@ public class FixBookControl {
 
     public FixBookControl() {
         //this should probably be a getInstance() per Jim's notes. LIBRARY is not under my control, so request update?
-        this.library = library.INSTANCE();
+        this.library = library.getInstance();
         state = FixBookControlState.INITIALISED;
     }
 

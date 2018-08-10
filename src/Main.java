@@ -4,16 +4,16 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static Scanner IN;
-    private static library LIB;
-    private static String MENU;
-    private static Calendar CAL;
-    private static SimpleDateFormat SDF;
-    
 
-    private static String Get_menu() {
+    private static Scanner scannerIn;
+    private static library library;
+    private static String menu;
+    private static Calendar calendar;
+    private static SimpleDateFormat simpleDateFormat;
+
+
+    private static String getMenu() {
         StringBuilder sb = new StringBuilder();
-
         sb.append("\nLibrary Main Menu\n\n")
           .append("  M  : add member\n")
           .append("  LM : list getMemberList\n")
@@ -32,87 +32,67 @@ public class Main {
           .append("  Q  : quit\n")
           .append("\n")
           .append("Choice : ");
-
         return sb.toString();
     }
 
 
     public static void main(String[] args) {
         try {
-            IN = new Scanner(System.in);
-            LIB = library.INSTANCE();
-            CAL = Calendar.getInstance();
-            SDF = new SimpleDateFormat("dd/MM/yyyy");
-
-            for (member m : LIB.getMemberList()) {
+            scannerIn = new Scanner(System.in);
+            library = library.getInstance();
+            calendar = Calendar.getInstance();
+            simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            for (member m : library.getMemberList()) {
                 output(m);
             }
             output(" ");
-            for (Book b : LIB.getBookList()) {
+            for (Book b : library.getBookList()) {
                 output(b);
             }
-
-            MENU = Get_menu();
-
+            menu = getMenu();
             boolean e = false;
-
             while (!e) {
-
-                output("\n" + SDF.format(CAL.date()));
-                String c = input(MENU);
-
+                output("\n" + simpleDateFormat.format(calendar.date()));
+                String c = input(menu);
                 switch (c.toUpperCase()) {
-
                 case "M":
                     addMember();
                     break;
-
                 case "LM":
                     listMembers();
                     break;
-
                 case "B":
                     addBook();
                     break;
-
                 case "LB":
                     listBooks();
                     break;
-
                 case "FB":
                     fixBooks();
                     break;
-
                 case "L":
                     borrowBook();
                     break;
-
                 case "R":
                     returnBook();
                     break;
-
                 case "LL":
                     listCurrentLoans();
                     break;
-
                 case "P":
                     payFine();
                     break;
-
                 case "T":
                     incrementDate();
                     break;
-
                 case "Q":
                     e = true;
                     break;
-
                 default:
                     output("\nInvalid option\n");
                     break;
                 }
-
-                library.SAVE();
+                library.save();
             }
         } catch (RuntimeException e) {
             output(e);
@@ -128,29 +108,26 @@ public class Main {
 
     private static void listCurrentLoans() {
         output("");
-        for (loan loan : LIB.getCurrentLoansList()) {
+        for (loan loan : library.getCurrentLoansList()) {
             output(loan + "\n");
         }
     }
 
 
-
     private static void listBooks() {
         output("");
-        for (Book book : LIB.getBookList()) {
+        for (Book book : library.getBookList()) {
             output(book + "\n");
         }
     }
 
 
-
     private static void listMembers() {
         output("");
-        for (member member : LIB.getMemberList()) {
+        for (member member : library.getMemberList()) {
             output(member + "\n");
         }
     }
-
 
 
     private static void borrowBook() {
@@ -171,10 +148,9 @@ public class Main {
     private static void incrementDate() {
         try {
             int days = Integer.valueOf(input("Enter number of days: ")).intValue();
-            CAL.incrementDate(days);
-            LIB.checkCurrentLoans();
-            output(SDF.format(CAL.date()));
-
+            calendar.incrementDate(days);
+            library.checkCurrentLoans();
+            output(simpleDateFormat.format(calendar.date()));
         } catch (NumberFormatException e) {
              output("\nInvalid number of days\n");
         }
@@ -182,13 +158,11 @@ public class Main {
 
 
     private static void addBook() {
-
         String author = input("Enter author: ");
         String title  = input("Enter title: ");
         String callNo = input("Enter call number: ");
-        Book book = LIB.addBook(author, title, callNo);
+        Book book = library.addBook(author, title, callNo);
         output("\n" + book + "\n");
-
     }
 
 
@@ -198,9 +172,8 @@ public class Main {
             String firstName  = input("Enter first name: ");
             String email = input("Enter email: ");
             int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-            member member = LIB.addMember(lastName, firstName, email, phoneNo);
+            member member = library.addMember(lastName, firstName, email, phoneNo);
             output("\n" + member + "\n");
-
         } catch (NumberFormatException e) {
              output("\nInvalid phone number\n");
         }
@@ -210,14 +183,11 @@ public class Main {
 
     private static String input(String prompt) {
         System.out.print(prompt);
-        return IN.nextLine();
+        return scannerIn.nextLine();
     }
-
 
 
     private static void output(Object object) {
         System.out.println(object);
     }
-
-
 }
