@@ -29,14 +29,14 @@ public class FixBookControl {
             //Should we be throwing exceptions when they can be avoided?
             throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
         }
-        currentBook = library.Book(bookId);
+        currentBook = library.book(bookId);
 
         if (currentBook == null) {
             userInterface.display("Invalid bookId");
             return;
         }
         if (!currentBook.damaged()) {
-            userInterface.display("Book has not been damaged");
+            userInterface.display("book has not been damaged");
             return;
         }
         userInterface.display(currentBook.toString());

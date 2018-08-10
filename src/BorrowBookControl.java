@@ -58,13 +58,13 @@ public class BorrowBookControl {
 		if (!controlState.equals(ControlState.SCANNING)) {
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING controlState");
 		}	
-		book = library.Book(bookId);
+		book = library.book(bookId);
 		if (book == null) {
 			borrowBookUi.display("Invalid bookId");
 			return;
 		}
 		if (!book.available()) {
-			borrowBookUi.display("Book cannot be borrowed");
+			borrowBookUi.display("book cannot be borrowed");
 			return;
 		}
 		pendingBookList.add(book);
