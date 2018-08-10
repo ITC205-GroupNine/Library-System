@@ -5,7 +5,7 @@ class ReturnBookControl {
     private enum ControlState {INITIALISED, READY, INSPECTING}
 
     private ControlState state;
-    private library library;
+    private Library library;
     private loan currentLoan;
 
 

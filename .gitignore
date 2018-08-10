@@ -29,5 +29,5 @@ out/
 src/
 bin/
 .idea/
-library.obj
+Library.obj
 repo.iml

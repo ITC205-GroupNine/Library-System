@@ -6,7 +6,7 @@ public class Main {
 
 
     private static Scanner scannerIn;
-    private static library library;
+    private static Library library;
     private static String menu;
     private static Calendar calendar;
     private static SimpleDateFormat simpleDateFormat;
