@@ -51,10 +51,10 @@ public class library implements Serializable {
         if (library == null) {
             Path path = Paths.get(libraryFile);
             if (Files.exists(path)) {
-                try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(libraryFile))) {
-                    library = (library) lof.readObject();
+                try (ObjectInputStream libraryFileOutputStream = new ObjectInputStream(new FileInputStream(libraryFile))) {
+                    library = (library) libraryFileOutputStream.readObject();
                     Calendar.getInstance().setDate(library.loadDate);
-                    lof.close();
+                    libraryFileOutputStream.close();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
