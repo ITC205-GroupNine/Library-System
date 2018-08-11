@@ -4,12 +4,12 @@ public class PayFineControl {
 	private enum CONTROL_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 	private CONTROL_STATE state;
 	
-	private library library;
+	private Library library;
 	private member member;;
 
 
 	public PayFineControl() {
-		this.library = library.INSTANCE();
+		this.library = library.getInstance();
 		state = CONTROL_STATE.INITIALISED;
 	}
 	

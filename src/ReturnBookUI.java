@@ -19,13 +19,13 @@ class ReturnBookUi {
 
 
     void run() {
-        output("Return Book Use Case UI\n");
+        output("Return book Use Case UI\n");
         while (true) {
             switch (state) {
                 case INITIALISED:
                     break;
                 case READY:
-                    String bookString = input("Scan Book (<enter> completes): ");
+                    String bookString = input("Scan book (<enter> completes): ");
                     if (bookString.length() == 0) {
                         returnBookControl.scanningComplete();
                     } else {

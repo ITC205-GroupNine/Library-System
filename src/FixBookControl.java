@@ -3,13 +3,13 @@ public class FixBookControl {
     private FixBookUi userInterface;
     private enum FixBookControlState { INITIALISED, READY, FIXING }
     private FixBookControlState state;
-    private library library;
+    private Library library;
     private Book currentBook;
 
 
     public FixBookControl() {
         //this should probably be a getInstance() per Jim's notes. LIBRARY is not under my control, so request update?
-        this.library = library.INSTANCE();
+        this.library = library.getInstance();
         state = FixBookControlState.INITIALISED;
     }
 
@@ -29,14 +29,14 @@ public class FixBookControl {
             //Should we be throwing exceptions when they can be avoided?
             throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
         }
-        currentBook = library.Book(bookId);
+        currentBook = library.book(bookId);
 
         if (currentBook == null) {
             userInterface.display("Invalid bookId");
             return;
         }
         if (!currentBook.damaged()) {
-            userInterface.display("Book has not been damaged");
+            userInterface.display("book has not been damaged");
             return;
         }
         userInterface.display(currentBook.toString());

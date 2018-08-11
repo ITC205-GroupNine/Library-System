@@ -34,7 +34,7 @@ public class BorrowBookUi {
 
 
     public void run() {
-        output("Borrow Book Use Case UI\n");
+        output("Borrow book Use Case UI\n");
         while (true) {
             switch (uiState) {
                 case CANCELLED:
@@ -58,7 +58,7 @@ public class BorrowBookUi {
                     borrowBookControl.cancel();
                     break;
                 case SCANNING:
-                    String bookString = input("Scan Book (<enter> completes): ");
+                    String bookString = input("Scan book (<enter> completes): ");
                     if (bookString.length() == 0) {
                         borrowBookControl.complete();
                         break;
@@ -67,7 +67,7 @@ public class BorrowBookUi {
                         int bookId = Integer.valueOf(bookString).intValue();
                         borrowBookControl.scanned(bookId);
                     } catch (NumberFormatException e) {
-                        output("Invalid Book Id");
+                        output("Invalid book Id");
                     }
                     break;
                 case FINALISING:

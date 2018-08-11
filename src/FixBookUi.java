@@ -23,11 +23,11 @@ public class FixBookUi {
 
 
     public void run() {
-        output("Fix Book Interface\n");
+        output("Fix book Interface\n");
         while (true) {
             switch (state) {
             case READY:
-                String bookIdentifier = input("Scan Book ( <enter> completes): ");
+                String bookIdentifier = input("Scan book ( <enter> completes): ");
                 if (bookIdentifier.length() == 0) {
                     fixBookControl.scanningComplete();
                 } else {
@@ -40,7 +40,7 @@ public class FixBookUi {
                 }
                 break;
             case FIXING:
-                String fixBookAnswer = input("Would you like to fix Book? (Y/N) : ");
+                String fixBookAnswer = input("Would you like to fix book? (Y/N) : ");
                 boolean fix = false;
                 if (fixBookAnswer.toUpperCase().equals("Y")) {
                     fix = true;
