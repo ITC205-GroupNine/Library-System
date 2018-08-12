@@ -5,7 +5,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class loan implements Serializable {
     public enum LoanState { CURRENT, OVER_DUE, DISCHARGED }
-    private int loanedBookId;
+    private int loanBookId;
     private Book book;
     private member memberId;
     private Date loanDate;
@@ -13,7 +13,7 @@ public class loan implements Serializable {
 
 
     public loan(int loanId, Book book, member member, Date dueDate) {
-        this.loanedBookId = loanId;
+        this.loanBookId = loanId;
         this.book = book;
         this.memberId = member;
         this.loanDate = dueDate;
@@ -35,7 +35,7 @@ public class loan implements Serializable {
 
 
     public Integer getId() {
-        return loanedBookId;
+        return loanBookId;
     }
 
 
@@ -47,7 +47,7 @@ public class loan implements Serializable {
     public String toString() {
         SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder loanInfoDisplay = new StringBuilder();
-        loanInfoDisplay.append("Loan:  ").append(loanedBookId).append("\n")
+        loanInfoDisplay.append("Loan:  ").append(loanBookId).append("\n")
             .append("  Borrower ").append(memberId.getId()).append(" : ")
             .append(memberId.getLastName()).append(", ").append(memberId.getFirstName()).append("\n")
             .append("  Book ").append(book.id()).append(" : " )
@@ -57,18 +57,18 @@ public class loan implements Serializable {
         return loanInfoDisplay.toString();
     }
 
-	//this should be getMember
-    public member Member() {
+
+    public member getMember() {
         return memberId;
     }
 
-    //This should be getBook
-    public Book Book() {
+
+    public Book getBook() {
     return book;
     }
 
-	//This should be getLoan
-    public void Loan() {
+
+    public void getLoan() {
         state = LoanState.DISCHARGED;
     }
 
