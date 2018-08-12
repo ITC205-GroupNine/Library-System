@@ -7,12 +7,12 @@ public class loan implements Serializable {
     public enum LoanState { CURRENT, OVER_DUE, DISCHARGED }
     private int loanBookId;
     private Book book;
-    private member memberId;
+    private Member memberId;
     private Date loanDate;
     private LoanState state;
 
 
-    public loan(int loanId, Book book, member member, Date dueDate) {
+    public loan(int loanId, Book book, Member member, Date dueDate) {
         this.loanBookId = loanId;
         this.book = book;
         this.memberId = member;
@@ -58,7 +58,7 @@ public class loan implements Serializable {
     }
 
 
-    public member getMember() {
+    public Member getMember() {
         return memberId;
     }
 

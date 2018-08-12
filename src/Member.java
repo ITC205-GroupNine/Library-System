@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class member implements Serializable {
+public class Member implements Serializable {
 
 	private String LN;
 	private String FN;
@@ -17,7 +17,7 @@ public class member implements Serializable {
 	private Map<Integer, loan> LNS;
 
 	
-	public member(String lastName, String firstName, String email, int phoneNo, int id) {
+	public Member(String lastName, String firstName, String email, int phoneNo, int id) {
 		this.LN = lastName;
 		this.FN = firstName;
 		this.EM = email;

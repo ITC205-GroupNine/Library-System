@@ -15,7 +15,7 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("\nLibrary Main Menu\n\n")
-		  .append("  M  : add member\n")
+		  .append("  M  : add Member\n")
 		  .append("  LM : list members\n")
 		  .append("\n")
 		  .append("  B  : add book\n")
@@ -44,7 +44,7 @@ public class Main {
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (member m : LIB.Members()) {
+			for (Member m : LIB.Members()) {
 				output(m);
 			}
 			output(" ");
@@ -122,7 +122,7 @@ public class Main {
 
 	
 	private static void payFine() {
-		new PayFineUI(new PayFineControl()).run();		
+		new PayFineUi(new PayFineControl()).run();
 	}
 
 
@@ -146,7 +146,7 @@ public class Main {
 
 	private static void listMembers() {
 		output("");
-		for (member member : LIB.Members()) {
+		for (Member member : LIB.Members()) {
 			output(member + "\n");
 		}		
 	}
@@ -198,7 +198,7 @@ public class Main {
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
 			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member member = LIB.Add_mem(lastName, firstName, email, phoneNo);
+			Member member = LIB.Add_mem(lastName, firstName, email, phoneNo);
 			output("\n" + member + "\n");
 			
 		} catch (NumberFormatException e) {
