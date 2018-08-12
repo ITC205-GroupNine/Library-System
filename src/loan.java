@@ -4,75 +4,72 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class loan implements Serializable {
-	
-	public static enum LOAN_STATE { CURRENT, OVER_DUE, DISCHARGED };
-	
-	private int ID;
-	private Book B;
-	private member M;
-	private Date D;
-	private LOAN_STATE state;
-
-	
-	public loan(int loanId, Book book, member member, Date dueDate) {
-		this.ID = loanId;
-		this.B = book;
-		this.M = member;
-		this.D = dueDate;
-		this.state = LOAN_STATE.CURRENT;
-	}
-
-	
-	public void checkOverDue() {
-		if (state == LOAN_STATE.CURRENT &&
-			Calendar.getInstance().date().after(D)) {
-			this.state = LOAN_STATE.OVER_DUE;			
-		}
-	}
-
-	
-	public boolean isOverDue() {
-		return state == LOAN_STATE.OVER_DUE;
-	}
-
-	
-	public Integer getId() {
-		return ID;
-	}
+    public enum LoanState { CURRENT, OVER_DUE, DISCHARGED }
+    private int loanedBookId;
+    private Book book;
+    private member memberId;
+    private Date loanDate;
+    private LoanState state;
 
 
-	public Date getDueDate() {
-		return D;
-	}
-	
-	
-	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("Loan:  ").append(ID).append("\n")
-		  .append("  Borrower ").append(M.getId()).append(" : ")
-		  .append(M.getLastName()).append(", ").append(M.getFirstName()).append("\n")
-		  .append("  Book ").append(B.id()).append(" : " )
-		  .append(B.title()).append("\n")
-		  .append("  DueDate: ").append(sdf.format(D)).append("\n")
-		  .append("  State: ").append(state);		
-		return sb.toString();
-	}
+    public loan(int loanId, Book book, member member, Date dueDate) {
+        this.loanedBookId = loanId;
+        this.book = book;
+        this.memberId = member;
+        this.loanDate = dueDate;
+        this.state = LoanState.CURRENT;
+    }
 
 
-	public member Member() {
-		return M;
-	}
+    public void checkOverDue() {
+        if (state == LoanState.CURRENT &&
+            Calendar.getInstance().date().after(loanDate)) {
+            this.state = LoanState.OVER_DUE;
+        }
+    }
 
 
-	public Book Book() {
-		return B;
-	}
+    public boolean isOverDue() {
+        return state == LoanState.OVER_DUE;
+    }
 
 
-	public void Loan() {
-		state = LOAN_STATE.DISCHARGED;		
-	}
+    public Integer getId() {
+        return loanedBookId;
+    }
+
+
+    public Date getDueDate() {
+        return loanDate;
+    }
+
+
+    public String toString() {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder loanInfoDisplay = new StringBuilder();
+        loanInfoDisplay.append("Loan:  ").append(loanedBookId).append("\n")
+            .append("  Borrower ").append(memberId.getId()).append(" : ")
+            .append(memberId.getLastName()).append(", ").append(memberId.getFirstName()).append("\n")
+            .append("  Book ").append(book.id()).append(" : " )
+            .append(book.title()).append("\n")
+            .append("  DueDate: ").append(simpleDate.format(loanDate)).append("\n")
+            .append("  State: ").append(state);
+        return loanInfoDisplay.toString();
+    }
+
+	//this should be getMember
+    public member Member() {
+        return memberId;
+    }
+
+    //This should be getBook
+    public Book Book() {
+    return book;
+    }
+
+	//This should be getLoan
+    public void Loan() {
+        state = LoanState.DISCHARGED;
+    }
 
 }
