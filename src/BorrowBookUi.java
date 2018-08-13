@@ -41,7 +41,7 @@ public class BorrowBookUi {
                     output("Borrowing Cancelled");
                     return;
                 case READY:
-                    String memberString = input("Swipe member card (press <enter> to cancel): ");
+                    String memberString = input("Swipe Member card (press <enter> to cancel): ");
                     if (memberString.length() == 0) {
                         borrowBookControl.cancel();
                         break;

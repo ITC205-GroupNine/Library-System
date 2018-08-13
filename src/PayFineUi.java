@@ -26,7 +26,7 @@ public class PayFineUi {
         while (true) {
             switch (state) {
             case READY:
-                String memberCard = input("Swipe member card (press <enter> to cancel): ");
+                String memberCard = input("Swipe Member card (press <enter> to cancel): ");
                 if (memberCard.length() == 0) {
                     control.cancel();
                     break;

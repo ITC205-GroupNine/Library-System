@@ -3,7 +3,7 @@ public class PayFineControl {
     private enum PayFineControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
     private PayFineControlState state;
     private Library library;
-    private member member;
+    private Member member;
 
 
     public PayFineControl() {

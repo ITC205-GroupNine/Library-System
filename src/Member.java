@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 @SuppressWarnings("serial")
-public class member implements Serializable {
+public class Member implements Serializable {
 
 
     private String lastName;
@@ -18,7 +18,7 @@ public class member implements Serializable {
     private Map<Integer, Loan> loanMap;
 
 
-    public member(String lastName, String firstName, String email, int phoneNumber, int id) {
+    public Member(String lastName, String firstName, String email, int phoneNumber, int id) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
@@ -68,7 +68,7 @@ public class member implements Serializable {
         if (!loanMap.containsKey(loan.getId())) {
             loanMap.put(loan.getId(), loan);
         } else {
-            throw new RuntimeException("Duplicate loan added to member");
+            throw new RuntimeException("Duplicate loan added to Member");
         }
     }
 
@@ -107,7 +107,7 @@ public class member implements Serializable {
         if (loanMap.containsKey(loan.getId())) {
             loanMap.remove(loan.getId());
         } else {
-            throw new RuntimeException("No such loan held by member");
+            throw new RuntimeException("No such loan held by Member");
         }
     }
 }
