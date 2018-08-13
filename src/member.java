@@ -30,7 +30,7 @@ public class member implements Serializable {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Member:  ").append(ID).append("\n")
+		sb.append("getMember:  ").append(ID).append("\n")
 		  .append("  Name:  ").append(LN).append(", ").append(FN).append("\n")
 		  .append("  Email: ").append(EM).append("\n")
 		  .append("  Phone: ").append(PN)
@@ -91,7 +91,7 @@ public class member implements Serializable {
 	
 	public double payFine(double amount) {
 		if (amount < 0) {
-			throw new RuntimeException("Member.payFine: amount must be positive");
+			throw new RuntimeException("getMember.payFine: amount must be positive");
 		}
 		double change = 0;
 		if (amount > FINES) {

@@ -47,7 +47,7 @@ public class BorrowBookControl {
 			controlState = ControlState.SCANNING;
 		}
 		else{
-			borrowBookUi.display("Member cannot borrow at this time");
+			borrowBookUi.display("getMember cannot borrow at this time");
 			borrowBookUi.setState(BorrowBookUi.UiState.RESTRICTED);
 		}
 	}
