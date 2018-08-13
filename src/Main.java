@@ -15,7 +15,7 @@ public class Main {
     private static String getMenu() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nLibrary Main Menu\n\n")
-          .append("  M  : add member\n")
+          .append("  M  : add Member\n")
           .append("  LM : list getMemberList\n")
           .append("\n")
           .append("  B  : add book\n")
@@ -42,7 +42,7 @@ public class Main {
             library = library.getInstance();
             calendar = Calendar.getInstance();
             simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            for (member m : library.getMemberList()) {
+            for (Member m : library.getMemberList()) {
                 output(m);
             }
             output(" ");
@@ -124,7 +124,7 @@ public class Main {
 
     private static void listMembers() {
         output("");
-        for (member member : library.getMemberList()) {
+        for (Member member : library.getMemberList()) {
             output(member + "\n");
         }
     }
@@ -172,7 +172,7 @@ public class Main {
             String firstName  = input("Enter first name: ");
             String email = input("Enter email: ");
             int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-            member member = library.addMember(lastName, firstName, email, phoneNo);
+            Member member = library.addMember(lastName, firstName, email, phoneNo);
             output("\n" + member + "\n");
         } catch (NumberFormatException e) {
              output("\nInvalid phone number\n");
