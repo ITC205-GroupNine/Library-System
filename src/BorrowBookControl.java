@@ -10,7 +10,7 @@ public class BorrowBookControl {
     private enum ControlState {INITIALISED, READY, SCANNING, FINALISING, COMPLETED, CANCELLED};
     private ControlState controlState;
     private List<Book> pendingBookList;
-    private List<loan> completedLoanList;
+    private List<Loan> completedLoanList;
     private Book book;
 
 
@@ -23,7 +23,7 @@ public class BorrowBookControl {
 
 	public void setUI(BorrowBookUi borrowBookUi) {
 		if (!controlState.equals(ControlState.INITIALISED)) {
-            throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED controlState");
+            throw new RuntimeException("BorrowBookControl: cannot call setUserInterface except in INITIALISED controlState");
         }
 		this.borrowBookUi = borrowBookUi;
 		borrowBookUi.setState(BorrowBookUi.UiState.READY);
@@ -47,7 +47,7 @@ public class BorrowBookControl {
 			controlState = ControlState.SCANNING;
 		}
 		else{
-			borrowBookUi.display("Member cannot borrow at this time");
+			borrowBookUi.display("getMember cannot borrow at this time");
 			borrowBookUi.setState(BorrowBookUi.UiState.RESTRICTED);
 		}
 	}
@@ -87,7 +87,7 @@ public class BorrowBookControl {
 			for (Book book : pendingBookList) {
 				borrowBookUi.display(book.toString());
 			}
-			completedLoanList = new ArrayList<loan>();
+			completedLoanList = new ArrayList<Loan>();
 			borrowBookUi.setState(BorrowBookUi.UiState.FINALISING);
 			controlState = ControlState.FINALISING;
 		}
@@ -99,11 +99,11 @@ public class BorrowBookControl {
 			throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING controlState");
 		}	
 		for (Book book : pendingBookList) {
-			loan loan = library.issueLoan(book, member);
+			Loan loan = library.issueLoan(book, member);
 			completedLoanList.add(loan);
 		}
 		borrowBookUi.display("Completed Loan Slip");
-		for (loan loan : completedLoanList) {
+		for (Loan loan : completedLoanList) {
 			borrowBookUi.display(loan.toString());
 		}
 		borrowBookUi.setState(BorrowBookUi.UiState.COMPLETED);

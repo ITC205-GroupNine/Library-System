@@ -50,7 +50,7 @@ public class BorrowBookUi {
                         int memberId = Integer.valueOf(memberString).intValue();
                         borrowBookControl.swiped(memberId);
                     } catch (NumberFormatException e) {
-                        output("Invalid Member Id");
+                        output("Invalid getMember Id");
                     }
                     break;
                 case RESTRICTED:

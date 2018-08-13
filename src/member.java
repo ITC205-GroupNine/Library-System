@@ -14,7 +14,7 @@ public class member implements Serializable {
 	private int ID;
 	private double FINES;
 	
-	private Map<Integer, loan> LNS;
+	private Map<Integer, Loan> LNS;
 
 	
 	public member(String lastName, String firstName, String email, int phoneNo, int id) {
@@ -30,7 +30,7 @@ public class member implements Serializable {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Member:  ").append(ID).append("\n")
+		sb.append("getMember:  ").append(ID).append("\n")
 		  .append("  Name:  ").append(LN).append(", ").append(FN).append("\n")
 		  .append("  Email: ").append(EM).append("\n")
 		  .append("  Phone: ").append(PN)
@@ -38,7 +38,7 @@ public class member implements Serializable {
 		  .append(String.format("  Fines Owed :  $%.2f", FINES))
 		  .append("\n");
 		
-		for (loan loan : LNS.values()) {
+		for (Loan loan : LNS.values()) {
 			sb.append(loan).append("\n");
 		}		  
 		return sb.toString();
@@ -50,8 +50,8 @@ public class member implements Serializable {
 	}
 
 	
-	public List<loan> getLoans() {
-		return new ArrayList<loan>(LNS.values());
+	public List<Loan> getLoans() {
+		return new ArrayList<Loan>(LNS.values());
 	}
 
 	
@@ -65,7 +65,7 @@ public class member implements Serializable {
 	}
 
 	
-	public void takeOutLoan(loan loan) {
+	public void takeOutLoan(Loan loan) {
 		if (!LNS.containsKey(loan.getId())) {
 			LNS.put(loan.getId(), loan);
 		}
@@ -91,7 +91,7 @@ public class member implements Serializable {
 	
 	public double payFine(double amount) {
 		if (amount < 0) {
-			throw new RuntimeException("Member.payFine: amount must be positive");
+			throw new RuntimeException("getMember.payFine: amount must be positive");
 		}
 		double change = 0;
 		if (amount > FINES) {
@@ -105,7 +105,7 @@ public class member implements Serializable {
 	}
 
 
-	public void dischargeLoan(loan loan) {
+	public void dischargeLoan(Loan loan) {
 		if (LNS.containsKey(loan.getId())) {
 			LNS.remove(loan.getId());
 		}
