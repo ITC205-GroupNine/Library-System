@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
 
-public class PayFineUI {
+public class PayFineUi {
     public enum PayFineUserInterfaceState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED }
     private PayFineControl control;
     private Scanner input;
     private PayFineUserInterfaceState state;
 
 
-    public PayFineUI(PayFineControl control) {
+    public PayFineUi(PayFineControl control) {
         this.control = control;
         input = new Scanner(System.in);
         state = PayFineUserInterfaceState.INITIALISED;

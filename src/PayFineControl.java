@@ -1,5 +1,5 @@
 public class PayFineControl {
-    private PayFineUI userInterface;
+    private PayFineUi userInterface;
     private enum PayFineControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
     private PayFineControlState state;
     private Library library;
@@ -12,12 +12,12 @@ public class PayFineControl {
     }
 
 
-    public void setUserInterface(PayFineUI userInterface) {
+    public void setUserInterface(PayFineUi userInterface) {
         if (!state.equals(PayFineControlState.INITIALISED)) {
             throw new RuntimeException("PayFineControl: cannot call setUserInterface except in INITIALISED state");
         }
         this.userInterface = userInterface;
-        userInterface.setState(PayFineUI.PayFineUserInterfaceState.READY);
+        userInterface.setState(PayFineUi.PayFineUserInterfaceState.READY);
         state = PayFineControlState.READY;
     }
 
@@ -27,19 +27,18 @@ public class PayFineControl {
             throw new RuntimeException("PayFineControl: cannot call cardSwiped except in READY state");
         }
         member = library.getMember(memberId);
-
         if (member == null) {
             userInterface.display("Invalid getMember Id");
             return;
         }
         userInterface.display(member.toString());
-        userInterface.setState(PayFineUI.PayFineUserInterfaceState.PAYING);
+        userInterface.setState(PayFineUi.PayFineUserInterfaceState.PAYING);
         state = PayFineControlState.PAYING;
     }
 
 
     public void cancel() {
-        userInterface.setState(PayFineUI.PayFineUserInterfaceState.CANCELLED);
+        userInterface.setState(PayFineUi.PayFineUserInterfaceState.CANCELLED);
         state = PayFineControlState.CANCELLED;
     }
 
@@ -53,7 +52,7 @@ public class PayFineControl {
             userInterface.display(String.format("Change: $%.2f", change));
         }
         userInterface.display(member.toString());
-        userInterface.setState(PayFineUI.PayFineUserInterfaceState.COMPLETED);
+        userInterface.setState(PayFineUi.PayFineUserInterfaceState.COMPLETED);
         state = PayFineControlState.COMPLETED;
         return change;
     }

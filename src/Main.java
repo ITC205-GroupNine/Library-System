@@ -102,13 +102,13 @@ public class Main {
 
 
     private static void payFine() {
-        new PayFineUI(new PayFineControl()).run();
+        new PayFineUi(new PayFineControl()).run();
     }
 
 
     private static void listCurrentLoans() {
         output("");
-        for (loan loan : library.getCurrentLoansList()) {
+        for (Loan loan : library.getCurrentLoansList()) {
             output(loan + "\n");
         }
     }

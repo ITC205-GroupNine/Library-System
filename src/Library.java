@@ -30,8 +30,8 @@ public class Library implements Serializable {
     private Date loadDate;
     private Map<Integer, Book> catalog;
     private Map<Integer, member> members;
-    private Map<Integer, loan> loans;
-    private Map<Integer, loan> currentLoans;
+    private Map<Integer, Loan> loans;
+    private Map<Integer, Loan> currentLoans;
     private Map<Integer, Book> damagedBooks;
 
 
@@ -114,8 +114,8 @@ public class Library implements Serializable {
     }
 
 
-    public List<loan> getCurrentLoansList() {
-        return new ArrayList<loan>(currentLoans.values());
+    public List<Loan> getCurrentLoansList() {
+        return new ArrayList<Loan>(currentLoans.values());
     }
 
 
@@ -161,7 +161,7 @@ public class Library implements Serializable {
         if (member.getFinesOwed() >= maxFineOwed) {
             return false;
         }
-        for (loan loan : member.getLoans()) {
+        for (Loan loan : member.getLoans()) {
             if (loan.isOverDue()) {
                 return false;
             }
@@ -175,9 +175,9 @@ public class Library implements Serializable {
     }
 
 
-    public loan issueLoan(Book book, member member) {
+    public Loan issueLoan(Book book, member member) {
         Date dueDate = Calendar.getInstance().getDueDate(loanPeriod);
-        loan loan = new loan(nextLibraryId(), book, member, dueDate);
+        Loan loan = new Loan(nextLibraryId(), book, member, dueDate);
         member.takeOutLoan(loan);
         book.borrow();
         loans.put(loan.getId(), loan);
@@ -186,7 +186,7 @@ public class Library implements Serializable {
     }
 
 
-    public loan getLoanByBookId(int bookId) {
+    public Loan getLoanByBookId(int bookId) {
         if (currentLoans.containsKey(bookId)) {
             return currentLoans.get(bookId);
         }
@@ -194,7 +194,7 @@ public class Library implements Serializable {
     }
 
 
-    public double calculateOverDueFine(loan loan) {
+    public double calculateOverDueFine(Loan loan) {
         if (loan.isOverDue()) {
             long daysOverDue = Calendar.getInstance().getDaysDifference(loan.getDueDate());
             double fine = daysOverDue * finePerDay;
@@ -204,7 +204,7 @@ public class Library implements Serializable {
     }
 
 
-    public void dischargeLoan(loan currentLoan, boolean isDamaged) {
+    public void dischargeLoan(Loan currentLoan, boolean isDamaged) {
         member member = currentLoan.getMember();
         Book book  = currentLoan.getBook();
         double overDueFine = calculateOverDueFine(currentLoan);
@@ -221,7 +221,7 @@ public class Library implements Serializable {
 
 
     public void checkCurrentLoans() {
-        for (loan loan : currentLoans.values()) {
+        for (Loan loan : currentLoans.values()) {
             loan.checkOverDue();
         }
     }

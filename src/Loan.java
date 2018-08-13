@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class loan implements Serializable {
+public class Loan implements Serializable {
     public enum LoanState { CURRENT, OVER_DUE, DISCHARGED }
     private int loanBookId;
     private Book book;
@@ -12,7 +12,7 @@ public class loan implements Serializable {
     private LoanState state;
 
 
-    public loan(int loanId, Book book, member member, Date dueDate) {
+    public Loan(int loanId, Book book, member member, Date dueDate) {
         this.loanBookId = loanId;
         this.book = book;
         this.memberId = member;
