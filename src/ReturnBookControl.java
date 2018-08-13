@@ -17,7 +17,7 @@ class ReturnBookControl {
 
     void setUi(ReturnBookUi returnBookUi) {
         if (!state.equals(ControlState.INITIALISED)) {
-            throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
+            throw new RuntimeException("ReturnBookControl: cannot call setUserInterface except in INITIALISED state");
         }
         this.returnBookUi = returnBookUi;
         returnBookUi.setState(ReturnBookUi.UiState.READY);
