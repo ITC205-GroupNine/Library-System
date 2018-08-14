@@ -1,3 +1,4 @@
+//File ready for static review - John Galvin 11330960
 import java.util.Scanner;
 
 
