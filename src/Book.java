@@ -1,5 +1,6 @@
 import java.io.Serializable;
 
+//File ready for static review
 
 public class Book implements Serializable {
 
