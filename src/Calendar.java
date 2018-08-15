@@ -1,6 +1,8 @@
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+//File ready for static review
+
 class Calendar {
 
     private static Calendar selfCalendar;

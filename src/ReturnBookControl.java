@@ -1,16 +1,16 @@
 class ReturnBookControl {
 
+//File ready for static review
+    
     private ReturnBookUi returnBookUi;
-
     private enum ControlState {INITIALISED, READY, INSPECTING}
-
     private ControlState state;
     private Library library;
     private Loan currentLoan;
 
 
     ReturnBookControl() {
-        this.library = library.getInstance();
+        this.library = Library.getInstance();
         state = ControlState.INITIALISED;
     }
 
@@ -20,7 +20,7 @@ class ReturnBookControl {
             throw new RuntimeException("ReturnBookControl: cannot call setUserInterface except in INITIALISED state");
         }
         this.returnBookUi = returnBookUi;
-        returnBookUi.setState(ReturnBookUi.UiState.READY);
+        returnBookUi.setInterfaceState(ReturnBookUi.State.READY);
         state = ControlState.READY;
     }
 
@@ -49,7 +49,7 @@ class ReturnBookControl {
         if (currentLoan.isOverDue()) {
             returnBookUi.display(String.format("\nOverdue fine : $%.2f", overDueFine));
         }
-        returnBookUi.setState(ReturnBookUi.UiState.INSPECTING);
+        returnBookUi.setInterfaceState(ReturnBookUi.State.INSPECTING);
         state = ControlState.INSPECTING;
     }
 
@@ -58,7 +58,7 @@ class ReturnBookControl {
         if (!state.equals(ControlState.READY)) {
             throw new RuntimeException("ReturnBookControl: cannot call scanningComplete except in READY state");
         }
-        returnBookUi.setState(ReturnBookUi.UiState.COMPLETED);
+        returnBookUi.setInterfaceState(ReturnBookUi.State.COMPLETED);
     }
 
 
@@ -68,7 +68,7 @@ class ReturnBookControl {
         }
         library.dischargeLoan(currentLoan, isDamaged);
         currentLoan = null;
-        returnBookUi.setState(ReturnBookUi.UiState.READY);
+        returnBookUi.setInterfaceState(ReturnBookUi.State.READY);
         state = ControlState.READY;
     }
 }
