@@ -1,9 +1,7 @@
 class ReturnBookControl {
 
     private ReturnBookUi returnBookUi;
-
     private enum ControlState {INITIALISED, READY, INSPECTING}
-
     private ControlState state;
     private Library library;
     private Loan currentLoan;

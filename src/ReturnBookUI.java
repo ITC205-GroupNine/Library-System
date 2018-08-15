@@ -4,7 +4,6 @@ import java.util.Scanner;
 class ReturnBookUi {
 
     public enum UiState {INITIALISED, READY, INSPECTING, COMPLETED}
-
     private ReturnBookControl returnBookControl;
     private Scanner input;
     private UiState state;
