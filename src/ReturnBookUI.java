@@ -3,16 +3,16 @@ import java.util.Scanner;
 
 class ReturnBookUi {
 
-    public enum UiState {INITIALISED, READY, INSPECTING, COMPLETED}
+    public enum State {INITIALISED, READY, INSPECTING, COMPLETED}
     private ReturnBookControl returnBookControl;
     private Scanner input;
-    private UiState state;
+    private State interfaceState;
 
 
     ReturnBookUi(ReturnBookControl control) {
         this.returnBookControl = control;
         input = new Scanner(System.in);
-        state = UiState.INITIALISED;
+        interfaceState = State.INITIALISED;
         control.setUi(this);
     }
 
@@ -20,7 +20,7 @@ class ReturnBookUi {
     void run() {
         output("Return book Use Case UI\n");
         while (true) {
-            switch (state) {
+            switch (interfaceState) {
                 case INITIALISED:
                     break;
                 case READY:
@@ -47,8 +47,8 @@ class ReturnBookUi {
                     output("Return processing complete");
                     return;
                 default:
-                    output("Unhandled state");
-                    throw new RuntimeException("ReturnBookUI : unhandled state :" + state);
+                    output("Unhandled interfaceState");
+                    throw new RuntimeException("ReturnBookUI : unhandled interfaceState :" + interfaceState);
             }
         }
     }
@@ -70,7 +70,7 @@ class ReturnBookUi {
     }
 
 
-    void setState(UiState state) {
-        this.state = state;
+    void setInterfaceState(State state) {
+        this.interfaceState = state;
     }
 }
