@@ -59,6 +59,4 @@ public class PayFineControl {
         state = PayFineControlState.COMPLETED;
         return change;
     }
-
-
 }
