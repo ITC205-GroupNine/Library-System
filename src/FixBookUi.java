@@ -72,6 +72,4 @@ public class FixBookUi {
     public void display(Object object) {
         output(object);
     }
-
-
 }
