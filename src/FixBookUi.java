@@ -1,8 +1,8 @@
+//File ready for static review - John Galvin 11330960
 import java.util.Scanner;
 
 
 public class FixBookUi {
-
     public enum FixBookUserInterfaceState { INITIALISED, READY, FIXING, COMPLETED }
     private FixBookControl fixBookControl;
     private Scanner userInput;
@@ -72,6 +72,4 @@ public class FixBookUi {
     public void display(Object object) {
         output(object);
     }
-
-
 }

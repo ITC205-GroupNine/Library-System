@@ -1,3 +1,6 @@
+//File ready for static review - John Galvin 11330960
+
+
 public class PayFineControl {
     private PayFineUi userInterface;
     private enum PayFineControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
@@ -56,6 +59,4 @@ public class PayFineControl {
         state = PayFineControlState.COMPLETED;
         return change;
     }
-
-
 }

@@ -1,6 +1,8 @@
+//File ready for static review - John Galvin 11330960
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 @SuppressWarnings("serial")
 public class Loan implements Serializable {
@@ -71,5 +73,4 @@ public class Loan implements Serializable {
     public void getLoan() {
         state = LoanState.DISCHARGED;
     }
-
 }
