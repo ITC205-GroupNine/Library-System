@@ -73,5 +73,4 @@ public class Loan implements Serializable {
     public void getLoan() {
         state = LoanState.DISCHARGED;
     }
-
 }
