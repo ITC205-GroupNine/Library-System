@@ -1,3 +1,4 @@
+//File ready for static review - Michael Coleman 11627449
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -17,12 +18,12 @@ import java.util.Map;
 public class Library implements Serializable {
 
 
-    private static final String libraryFile = "Library.obj";
-    private static final int loanLimit = 2;
-    private static final int loanPeriod = 2;
-    private static final double finePerDay = 1.0;
-    private static final double maxFineOwed = 5.0;
-    private static final double damageFee = 2.0;
+    private static final String LIBRARY_FILE = "Library.obj";
+    private static final int LOAN_LIMIT = 2;
+    private static final int LOAN_PERIOD = 2;
+    private static final double FINE_PER_DAY = 1.0;
+    private static final double MAX_FINE_OWED = 5.0;
+    private static final double DAMAGE_FEE = 2.0;
     private static Library library;
     private int bookId;
     private int memberId;
@@ -49,9 +50,9 @@ public class Library implements Serializable {
 
     public static synchronized Library getInstance() {
         if (library == null) {
-            Path path = Paths.get(libraryFile);
+            Path path = Paths.get(LIBRARY_FILE);
             if (Files.exists(path)) {
-                try (ObjectInputStream libraryFileOutputStream = new ObjectInputStream(new FileInputStream(libraryFile))) {
+                try (ObjectInputStream libraryFileOutputStream = new ObjectInputStream(new FileInputStream(LIBRARY_FILE))) {
                     library = (Library) libraryFileOutputStream.readObject();
                     Calendar.getInstance().setDate(library.loadDate);
                     libraryFileOutputStream.close();
@@ -68,7 +69,7 @@ public class Library implements Serializable {
     public static synchronized void save() {
         if (library != null) {
             library.loadDate = Calendar.getInstance().date();
-            try (ObjectOutputStream libraryFileOutputStream = new ObjectOutputStream(new FileOutputStream(libraryFile))) {
+            try (ObjectOutputStream libraryFileOutputStream = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE))) {
                 libraryFileOutputStream.writeObject(library);
                 libraryFileOutputStream.flush();
                 libraryFileOutputStream.close();
@@ -150,15 +151,15 @@ public class Library implements Serializable {
 
 
     public int getLoanLimit() {
-        return loanLimit;
+        return LOAN_LIMIT;
     }
 
 
     public boolean memberCanBorrow(Member member) {
-        if (member.getNumberOfCurrentLoans() == loanLimit) {
+        if (member.getNumberOfCurrentLoans() == LOAN_LIMIT) {
             return false;
         }
-        if (member.getFinesOwed() >= maxFineOwed) {
+        if (member.getFinesOwed() >= MAX_FINE_OWED) {
             return false;
         }
         for (Loan loan : member.getLoans()) {
@@ -171,12 +172,12 @@ public class Library implements Serializable {
 
 
     public int loansRemainingForMember(Member member) {
-        return loanLimit - member.getNumberOfCurrentLoans();
+        return LOAN_LIMIT - member.getNumberOfCurrentLoans();
     }
 
 
     public Loan issueLoan(Book book, Member member) {
-        Date dueDate = Calendar.getInstance().getDueDate(loanPeriod);
+        Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
         Loan loan = new Loan(nextLibraryId(), book, member, dueDate);
         member.takeOutLoan(loan);
         book.borrow();
@@ -197,7 +198,7 @@ public class Library implements Serializable {
     public double calculateOverDueFine(Loan loan) {
         if (loan.isOverDue()) {
             long daysOverDue = Calendar.getInstance().getDaysDifference(loan.getDueDate());
-            double fine = daysOverDue * finePerDay;
+            double fine = daysOverDue * FINE_PER_DAY;
             return fine;
         }
         return 0.0;
@@ -212,7 +213,7 @@ public class Library implements Serializable {
         member.dischargeLoan(currentLoan);
         book.bookReturn(isDamaged);
         if (isDamaged) {
-            member.addFine(damageFee);
+            member.addFine(DAMAGE_FEE);
             damagedBooks.put(book.id(), book);
         }
         currentLoan.getLoan();

@@ -1,3 +1,4 @@
+//File ready for static review - Michael Coleman 11627449
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
