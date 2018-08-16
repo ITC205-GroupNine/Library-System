@@ -1,3 +1,4 @@
+//File ready for static review - Michael Coleman 11627449
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 

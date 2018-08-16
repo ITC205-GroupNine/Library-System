@@ -1,7 +1,9 @@
+//File ready for static review - Michael Coleman 11627449
 import java.util.Scanner;
 
 
 public class BorrowBookUi {
+
 
     public enum UiState {INITIALISED, READY, RESTRICTED, SCANNING, FINALISING, COMPLETED, CANCELLED}
     private BorrowBookControl borrowBookControl;
@@ -93,6 +95,4 @@ public class BorrowBookUi {
     public void display(Object object) {
         output(object);
     }
-
-
 }
